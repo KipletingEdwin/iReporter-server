@@ -1,10 +1,16 @@
 Rails.application.routes.draw do
-  # Health check
-  get "up" => "rails/health#show", as: :rails_health_check
+
 
   # Authentication
   post 'register', to: 'auth#register'
   post 'login', to: 'auth#login'
+
+  # Reports routes
+
+  resources :reports, only: [:index, :show, :create, :update, :destroy]
+
+  # Health check
+  get "up" => "rails/health#show", as: :rails_health_check
 
   # Reports (records)
   namespace :api do
